@@ -1,0 +1,6 @@
+image: gcc
+
+build:
+  stage: build
+  script:
+    - cd build && cmake .. && make
