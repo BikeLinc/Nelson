@@ -105,7 +105,7 @@ private:
 	// GLFW Member Create Functions
 	void createMonitor(); // Returns secondary monitor if availible for debugging, returns main window if not.
 	void createMode();
-	void createWindow();
+	void createWindow(bool fullscreen);
 
 	// Static Callback Functions
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);

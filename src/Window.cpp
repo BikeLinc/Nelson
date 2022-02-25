@@ -30,7 +30,7 @@ void Window::init() {
 #endif
         createMonitor();
         createMode();
-        createWindow();
+        createWindow(true);
         if (GLEW_OK != glewInit()) {
                 glfwTerminate();
         }     
@@ -88,8 +88,12 @@ void Window::createMode() {
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
 }
 
-void Window::createWindow() {
-        window = glfwCreateWindow(mode->width, mode->height, title, monitor, NULL);
+void Window::createWindow(bool fullscreen) {
+        if(fullscreen) {
+                window = glfwCreateWindow(mode->width, mode->height, title, monitor, NULL);
+        } else if(!fullscreen) {
+                window = glfwCreateWindow(mode->width, mode->height, title, NULL, NULL);
+        }
         if (window == NULL)
         {
                 std::cout << "Failed to create GLFW window" << std::endl;
@@ -100,7 +104,10 @@ void Window::createWindow() {
         glfwSetKeyCallback(window, &Window::key_callback);
         glfwSetCursorPosCallback(window, &Window::mouse_callback);
         glfwSetScrollCallback(window, &Window::scroll_callback);
-        glViewport(0, (mode->height - mode->width) / 2, mode->width, mode->width);
+        int w, h;
+        glfwGetFramebufferSize(window, &w, &h);
+        glViewport(0, (h - w) / 2, w, w);
+        std::cout << w << ", " << h << std::endl;
         // tell GLFW to capture our mouse
         //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }

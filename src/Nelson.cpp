@@ -6,7 +6,7 @@ int main() {
 
 	Scene scene(glm::vec4(0.25, 0.25, 0.35, 1.0));
 
-	Model rectangle(glm::vec2(1.0), "../res/images/cat.png");
+	Model rectangle(glm::vec2(0.25), "../res/images/cat.png");
 	 
 	ModelInstance player(&rectangle, Transform());
 
