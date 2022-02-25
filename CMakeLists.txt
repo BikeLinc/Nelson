@@ -27,15 +27,15 @@ endif()
 include_directories(vendor/glew/include)
 
 file(GLOB GLM_SRC
-    "src/glm/*.hpp"
-    "src/glm/ext/*.hpp"
-    "src/glm/gtc/*.hpp"
-    "src/glm/gtc/*.hpp"
+    "vendor/glm/*.hpp"
+    "vendor/glm/ext/*.hpp"
+    "vendor/glm/gtc/*.hpp"
+    "vendor/glm/gtc/*.hpp"
 )
 
 file(GLOB SOIL2_SRC
-     "src/SOIL2/*.h"
-     "src/SOIL2/*.c"
+     "vendor/SOIL2/*.h"
+     "vendor/SOIL2/*.c"
 )
 
 file(GLOB CORE_SRC

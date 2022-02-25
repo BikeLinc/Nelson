@@ -22,7 +22,7 @@
 #include <sstream>
 
 // SOIL2
-#include "SOIL2/SOIL2.h"
+#include "../vendor/SOIL2/SOIL2.h"
 
 // OpenGL
 #include <GL/glew.h>
@@ -32,9 +32,9 @@
 #include <GLFW/glfw3.h>
 
 // OpenGL Math Library
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
+#include "../vendor/glm/glm.hpp"
+#include "../vendor/glm/gtc/matrix_transform.hpp"
+#include "../vendor/glm/gtc/type_ptr.hpp"
 
 // Utilities
 #include "Shader.h"
