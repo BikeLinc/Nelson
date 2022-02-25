@@ -17,14 +17,14 @@ include_directories( ${OPENGL_INCLUDE_DIRS} )
 set( GLFW_BUILD_DOCS OFF CACHE BOOL  "GLFW lib only" )
 set( GLFW_INSTALL OFF CACHE BOOL  "GLFW lib only" )
 
-add_subdirectory( glfw )
-add_subdirectory( glew/build/cmake )
+add_subdirectory( vendor/glfw )
+add_subdirectory( vendor/glew/build/cmake )
 
 if( MSVC )
     SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
 endif()
 
-include_directories(glew/include)
+include_directories(vendor/glew/include)
 
 file(GLOB GLM_SRC
     "src/glm/*.hpp"
