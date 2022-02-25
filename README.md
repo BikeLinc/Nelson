@@ -6,7 +6,7 @@ Nelson is a C++ based 2D game engine and editor that is in very early stages of 
 
 ### Clone repository
 ```bash
-git clone https://gitlab.com/bikelinc/nelson
+git clone https://github.com/bikelinc/nelson
 ```
 ### Navigate into build directory
 ```bash
