@@ -14,34 +14,28 @@
 #ifndef NELSON_ENGINE_H
 #define NELSON_ENGINE_H
 
-// Standard Library
+// C++ Standard Library
 #include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-// SOIL2
-#include "../vendor/SOIL2/SOIL2.h"
-
-// OpenGL
+// Libraries
 #include <GL/glew.h>
 #define GLEW_STATIC
-
-// GLFW
 #include <GLFW/glfw3.h>
-
-// OpenGL Math Library
+#include "../vendor/SOIL2/SOIL2.h"
 #include "../vendor/glm/glm.hpp"
 #include "../vendor/glm/gtc/matrix_transform.hpp"
 #include "../vendor/glm/gtc/type_ptr.hpp"
 
-// Utilities
+// Nelson Utils
 #include "Shader.h"
 #include "TextureLoader.h"
 #include "Window.h"
 
-// Scene
+// Nelson Game
 #include "Scene.h"
 
 #endif /* NELSON_ENGINE_H */

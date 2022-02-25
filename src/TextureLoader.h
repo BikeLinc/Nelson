@@ -18,6 +18,8 @@
 
 class TextureLoader {
 public:
+        int width = 0, height = 0;
+
         /**
          * Constructor loads image from specified path on class instantiation.
          *
@@ -47,8 +49,6 @@ private:
          * \return
          */
         void load(const char* path) {
-                int width, height;
-
                 glGenTextures(1, &this->texture);
                 glBindTexture(GL_TEXTURE_2D, this->texture);
 
