@@ -6,13 +6,9 @@ int main() {
 
 	Scene scene(glm::vec4(0.25, 0.25, 0.35, 1.0));
 
-	Model rectangle(glm::vec2(0.25), "../res/images/chong.png");
-	 
-	ModelInstance player(&rectangle, Transform());
+	Sprite sprite("../res/images/chong.png", Transform());
 
-	scene.add(player);
-
-	scene.start();
+	scene.add(sprite);
 
 	float playerMovementSpeed = 0.005f;
 
@@ -33,9 +29,7 @@ int main() {
 			playerMovement.position.x += playerMovementSpeed;
 		}
 
-		player.transform.position += playerMovement.position;
-
-		scene.update();
+		sprite.transform.position += playerMovement.position;
 
 		scene.draw();
 

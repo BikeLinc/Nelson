@@ -64,40 +64,51 @@ struct Mesh {
 	}
 };
 
-struct Model {
-	Mesh* mesh;
-	unsigned int texMap1 = 0, texMap2 = 0;
-	Shader* shader;
+struct Sprite {
+	unsigned int textureID = 0;
+	glm::vec2 meshBounds;
 	Transform transform;
-	Model(glm::vec2 size, const char* texPath2) {
-		mesh = new Mesh(size);
-		/// TexPath1 is const null because the shader only works with one texture currently.
-		texMap1 = TextureLoader("").getTexture();
-		texMap2 = TextureLoader(texPath2).getTexture();
+	Mesh* mesh;
+	Shader* shader;
+
+	Sprite(const char* texturePath, glm::vec2 meshBounds, Transform transformOrigin) {
+		textureID = TextureLoader(texturePath).getTexture();
+		this->meshBounds = meshBounds;
+		this->transform = transformOrigin;
+		mesh = new Mesh(meshBounds);
 		shader = new Shader("../res/shaders/vert.glsl", "../res/shaders/frag.glsl");
 		shader->use();
-		shader->setInt("texture1", texMap1);
-		shader->setInt("texture2", texMap2);
+		shader->setInt("textureSRC", textureID);
 	}
 
-	void draw(Transform transformation) {
-		glActiveTexture(GL_TEXTURE0 + texMap1);
-		glBindTexture(GL_TEXTURE_2D, texMap1);
-		glActiveTexture(GL_TEXTURE0 + texMap2);
-		glBindTexture(GL_TEXTURE_2D, texMap2);
+	Sprite(const char* texturePath, Transform transformOrigin) {
+		TextureLoader texLoader(texturePath);
+		textureID = texLoader.getTexture();
+		int max = std::max(texLoader.width, texLoader.height);
+		this->meshBounds = glm::vec2(texLoader.width/max, texLoader.height/max);
+		this->transform = transformOrigin;
+		mesh = new Mesh(meshBounds);
+		shader = new Shader("../res/shaders/vert.glsl", "../res/shaders/frag.glsl");
+		shader->use();
+		shader->setInt("textureSRC", textureID);
+	}
+
+	void draw() {
+		glActiveTexture(GL_TEXTURE0 + textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
 
 		// create transformations
-		glm::mat4 transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-		transform = glm::translate(transform, transformation.position);
-		transform = glm::rotate(transform, transformation.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-		transform = glm::rotate(transform, transformation.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-		transform = glm::rotate(transform, transformation.rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-		transform = glm::scale(transform, transformation.scale);
+		glm::mat4 model_transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+		model_transform = glm::translate(model_transform, transform.position);
+		model_transform = glm::rotate(model_transform, transform.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
+		model_transform = glm::rotate(model_transform, transform.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
+		model_transform = glm::rotate(model_transform, transform.rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+		model_transform = glm::scale(model_transform, transform.scale);
 
 		// get matrix's uniform location and set matrix
 		shader->use();
 		unsigned int transformLoc = glGetUniformLocation(shader->ID, "transform");
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(model_transform));
 
 		// render container
 		glBindVertexArray(mesh->VAO);
@@ -111,54 +122,35 @@ struct Model {
 	}
 };
 
-struct ModelInstance {
-	Model* model = nullptr;
-	Transform transform;
-	ModelInstance(Model* model, Transform transform) {
-		this->model = model;
-		this->transform = transform;
-	}
-
-	void draw() {
-		model->draw(transform);
-	}
-};
-
-struct Scene {
-	std::vector<ModelInstance*> instances;
+class Scene {
+public:
 	glm::vec4 backgroundColor;
+	
 
 	Scene(glm::vec4 backgroundColor = glm::vec4(1)) {
 		this->backgroundColor = backgroundColor;
 	}
 
-	void add(ModelInstance& model) {
-		instances.push_back(&model);
-	}
-
-	void start() {
-
-	}
-
-	void update() {
-
+	void add(Sprite& model) {
+		models.push_back(&model);
 	}
 
 	void draw() {
 		glClearColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w);
 		glClear(GL_COLOR_BUFFER_BIT);
-		for (int i = 0; i < instances.size(); i++) {
-			instances.at(i)->draw();
+		for (int i = 0; i < models.size(); i++) {
+			models.at(i)->draw();
 		}
 	}
 
 	void destroy() {
-		for (int i = 0; i < instances.size(); i++) {
-			instances.at(i)->model->destroy();
+		for (int i = 0; i < models.size(); i++) {
+			models.at(i)->destroy();
 		}
 	}
-	 
-	
+
+private:
+	std::vector<Sprite*> models;
 };
 
 #endif
