@@ -34,7 +34,7 @@ void Window::init() {
         if (GLEW_OK != glewInit()) {
                 glfwTerminate();
         }     
-        glfwSwapInterval(0);
+        glfwSwapInterval(1);
 }
 
 void Window::show() {
@@ -107,7 +107,6 @@ void Window::createWindow(bool fullscreen) {
         int w, h;
         glfwGetFramebufferSize(window, &w, &h);
         glViewport(0, (h - w) / 2, w, w);
-        std::cout << w << ", " << h << std::endl;
         // tell GLFW to capture our mouse
         //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }

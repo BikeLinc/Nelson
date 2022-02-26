@@ -1,35 +1,33 @@
 #include "NelsonEngine.h"
 
+class Player : public Sprite {
+public:
+	Player(const char* texturePath, glm::vec2 meshBounds, Transform transformOrigin) : Sprite(texturePath, meshBounds, transformOrigin) {
+
+	}
+
+	void update(double delta) override {
+		transform.position.x += delta * 0.05;;
+	}
+};
+
 int main() {
 	Window window("Nelson");
 	window.init();
 
 	Scene scene(glm::vec4(0.25, 0.25, 0.35, 1.0));
 
-	Sprite sprite("../res/images/chong.png", Transform());
+	Player sprite("../res/images/chong.png", glm::vec2(0.25), Transform());
 
 	scene.add(sprite);
 
-	float playerMovementSpeed = 0.005f;
+	double t0 = 0.0;
+	double t1 = 0.0;
 
 	while (window.isOpen()) {
+		t0 = t1; t1 = glfwGetTime(); double delta = t1 - t0;
 
-		Transform playerMovement;
-
-		if (window.isKeyDown(GLFW_KEY_W)) {
-			playerMovement.position.y += playerMovementSpeed;
-		}
-		if (window.isKeyDown(GLFW_KEY_S)) {
-			playerMovement.position.y -= playerMovementSpeed;
-		}
-		if (window.isKeyDown(GLFW_KEY_A)) {
-			playerMovement.position.x -= playerMovementSpeed;
-		}
-		if (window.isKeyDown(GLFW_KEY_D)) {
-			playerMovement.position.x += playerMovementSpeed;
-		}
-
-		sprite.transform.position += playerMovement.position;
+		scene.update(delta);
 
 		scene.draw();
 

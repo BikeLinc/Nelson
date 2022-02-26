@@ -93,6 +93,10 @@ struct Sprite {
 		shader->setInt("textureSRC", textureID);
 	}
 
+	virtual void update(double delta) {
+
+	}
+
 	void draw() {
 		glActiveTexture(GL_TEXTURE0 + textureID);
 		glBindTexture(GL_TEXTURE_2D, textureID);
@@ -133,6 +137,12 @@ public:
 
 	void add(Sprite& model) {
 		models.push_back(&model);
+	}
+
+	void update(double delta) {
+		for (int i = 0; i < models.size(); i++) {
+			models.at(i)->update(delta);
+		}
 	}
 
 	void draw() {
