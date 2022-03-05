@@ -1,37 +1,26 @@
-## Welcome to GitHub Pages
+Nelson is a game engine and editor in development. Large updates will be posted to this site as blog posts while smaller updates will be facilitated through the issue board. The purpose for this project is the creation of a simple and easy-to-extend interface for creating small games. 
 
-You can use the [editor on GitHub](https://github.com/BikeLinc/Nelson/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Features:
+- 2D Mesh 
+- 3D Mesh
+- Mesh Generation
+  - Cube
+  - Plane
+  - Sphere
+  - Cone
+  - IcoSphere
+  - Terrain
+  - From Wavefront Model
+- Asset Loading
+  - Textures
+  - GLSL Shaders
+  - ASCII File
+  - SceneModel
+- GUI
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/BikeLinc/Nelson/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Dependencies:
+- [GLEW](https://github.com/nigels-com/glew)
+- [GLFW](https://github.com/glfw/glfw)
+- [GLM](https://github.com/g-truc/glm)
+- [SOIL2](https://github.com/SpartanJ/SOIL2)
+- [IMGUI](https://github.com/ocornut/imgui)
