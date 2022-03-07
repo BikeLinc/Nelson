@@ -1,8 +1,8 @@
 # Nelson
 
 ### Nelson is a C++ based 2D game engine and editor that is in very early stages of development.
-Sprite rendered using engine.
-![Sprite rendered in nelson engine](https://github.com/BikeLinc/Nelson/blob/main/res/images/screenshots/sprite_rendered.png)
+Sprite rendered using engine. All project development and planning will be documented via issues and the <a href="https://github.com/bikelinc/nelson/wiki">wiki</a>.
+![Example of a sprite rendered in the engine.](https://github.com/BikeLinc/Nelson/blob/main/res/images/screenshots/sprite_rendered.png)
 
 ## Building
 
