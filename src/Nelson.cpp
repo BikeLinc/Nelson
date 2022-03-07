@@ -18,6 +18,9 @@ int main() {
 	Renderer renderer;
 	renderer.init();
 
+	Gui gui;
+	gui.init(window.getWindow());
+
 	Scene scene(glm::vec4(0.25, 0.25, 0.35, 1.0));
 
 	Sprite sprite("../res/images/chong.png", glm::vec2(0.25), Transform());
@@ -37,10 +40,14 @@ int main() {
 
 		renderer.render(&scene);
 
+		gui.draw();
+
 		window.update();
 	}
 
 	scene.destroy();
+
+	gui.terminate();
 	
 	window.terminate();
 

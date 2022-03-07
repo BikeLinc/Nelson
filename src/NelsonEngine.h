@@ -42,6 +42,7 @@
 #include "Scene.h"
 
 // Nelson Engine
+#include "Gui.h"
 #include "Window.h"
 #include "Renderer.h"
 
