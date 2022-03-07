@@ -5,7 +5,7 @@
  * @author	Lincoln Scheer
  * @since	02/01/2022
  *
- * @breif	TextureLoader is a Nelson utility that provides easy interface for
+ * @brief	TextureLoader is a Nelson utility that provides easy interface for
  *              loading, storing and retrieving image data. This class uses the
  *              SOIL2 header-only image library to load images.
  *

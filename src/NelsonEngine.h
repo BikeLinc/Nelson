@@ -6,8 +6,8 @@
  * @since	02/21/2022
  *
  * @breif	NelsonEngine.h is a static header-only collection of the headers
- *          that Nelson requires. Grouping of includes in this file will allow
- *          an easy transition to using pre-compiled headers.
+ *		that Nelson requires. Grouping of includes in this file will allow
+ *		an easy transition to using pre-compiled headers.
  *
  *****************************************************************************/
 
@@ -33,9 +33,17 @@
 // Nelson Utils
 #include "Shader.h"
 #include "TextureLoader.h"
-#include "Window.h"
 
-// Nelson Game
+// Nelson Objects
+#include "Transform.h"
+#include "Geometry.h"
+#include "Mesh.h"
+#include "Model.h"
 #include "Scene.h"
+
+// Nelson Engine
+#include "Window.h"
+#include "Renderer.h"
+
 
 #endif /* NELSON_ENGINE_H */

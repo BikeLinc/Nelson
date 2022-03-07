@@ -1,8 +1,8 @@
 #include "NelsonEngine.h"
 
-class Player : public Sprite {
+class Sprite : public Model {
 public:
-	Player(const char* texturePath, glm::vec2 meshBounds, Transform transformOrigin) : Sprite(texturePath, meshBounds, transformOrigin) {
+	Sprite(const char* texturePath, glm::vec2 meshBounds, Transform transformOrigin) : Model(texturePath, PlaneGeometry(meshBounds), transformOrigin) {
 
 	}
 
@@ -15,21 +15,27 @@ int main() {
 	Window window("Nelson");
 	window.init();
 
+	Renderer renderer;
+	renderer.init();
+
 	Scene scene(glm::vec4(0.25, 0.25, 0.35, 1.0));
 
-	Player sprite("../res/images/chong.png", glm::vec2(0.25), Transform());
+	Sprite sprite("../res/images/chong.png", glm::vec2(0.25), Transform());
 
 	scene.add(sprite);
 
-	double t0 = 0.0;
-	double t1 = 0.0;
+	float deltaTime = 0.0f;
+	float lastFrame = 0.0f;
 
 	while (window.isOpen()) {
-		t0 = t1; t1 = glfwGetTime(); double delta = t1 - t0;
 
-		scene.update(delta);
+		float currentFrame = static_cast<float>(glfwGetTime());
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 
-		scene.draw();
+		scene.update(deltaTime);
+
+		renderer.render(&scene);
 
 		window.update();
 	}

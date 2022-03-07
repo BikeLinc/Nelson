@@ -5,9 +5,9 @@
  * @author	Lincoln Scheer
  * @since	02/03/2022
  *
- * @breif	Window is a Nelson utility that provides a high-level
- *			interface for creating and manipulating a cross platform window
- *			that holds an opengl context.
+ * @brief	Window is a Nelson utility that provides a high-level
+ *		interface for creating and manipulating a cross platform window
+ *		that holds an opengl context.
  *
  *****************************************************************************/
 
