@@ -1,13 +1,13 @@
 #include "NelsonEngine.h"
 
-class Sprite : public Model {
+class TexturedPlane : public Model {
 public:
-	Sprite(const char* texturePath, glm::vec2 meshBounds, Transform transformOrigin) : Model(texturePath, PlaneGeometry(meshBounds), transformOrigin) {
+	TexturedPlane(const char* name, const char* texturePath, glm::vec2 meshBounds, Transform transformOrigin) : Model(name, texturePath, PlaneGeometry(meshBounds), transformOrigin) {
 
 	}
 
 	void update(double delta) override {
-		transform.position.x += delta * 0.05;;
+		// Implement Update Here
 	}
 };
 
@@ -23,9 +23,11 @@ int main() {
 
 	Scene scene(glm::vec4(0.25, 0.25, 0.35, 1.0));
 
-	Sprite sprite("../res/images/chong.png", glm::vec2(0.25), Transform());
+	TexturedPlane chong("Chong", "../res/images/chong.png", glm::vec2(0.25), Transform());
+	TexturedPlane box("Box", "../res/images/rocks.jpg", glm::vec2(0.25), Transform());
 
-	scene.add(sprite);
+	scene.add(chong);
+	scene.add(box);
 
 	float deltaTime = 0.0f;
 	float lastFrame = 0.0f;
@@ -40,7 +42,7 @@ int main() {
 
 		renderer.render(&scene);
 
-		gui.draw();
+		gui.draw(scene);
 
 		window.update();
 	}

@@ -16,13 +16,17 @@
 #include "NelsonEngine.h"
 
 struct Model {
+	const char* name;
+	const char* texturePath;
 	unsigned int textureID = 0;
 	glm::vec2 meshBounds;
 	Transform transform;
 	Mesh* mesh;
 	Shader* shader;
 
-	Model(const char* texturePath, Geometry geometry, Transform transformOrigin) {
+	Model(const char* name, const char* texturePath, Geometry geometry, Transform transformOrigin) {
+		this->name = name;
+		this->texturePath = texturePath;
 		textureID = TextureLoader(texturePath).getTexture();
 		this->meshBounds = meshBounds;
 		this->transform = transformOrigin;
@@ -32,7 +36,9 @@ struct Model {
 		shader->setInt("textureSRC", textureID);
 	}
 
-	Model(const char* texturePath, Transform transformOrigin) {
+	Model(const char* name, const char* texturePath, Transform transformOrigin) {
+		this->name = name;
+		this->texturePath = texturePath;
 		TextureLoader texLoader(texturePath);
 		textureID = texLoader.getTexture();
 		int max = std::max(texLoader.width, texLoader.height);
@@ -55,9 +61,9 @@ struct Model {
 		// create transformations
 		glm::mat4 model_transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 		model_transform = glm::translate(model_transform, transform.position);
-		model_transform = glm::rotate(model_transform, transform.rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
-		model_transform = glm::rotate(model_transform, transform.rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
-		model_transform = glm::rotate(model_transform, transform.rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
+		model_transform = glm::rotate(model_transform, glm::radians(transform.rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+		model_transform = glm::rotate(model_transform, glm::radians(transform.rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+		model_transform = glm::rotate(model_transform, glm::radians(transform.rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
 		model_transform = glm::scale(model_transform, transform.scale);
 
 		// get matrix's uniform location and set matrix
